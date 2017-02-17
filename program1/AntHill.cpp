@@ -8,18 +8,20 @@ AntHill::AntHill(){
 	ants = new LinkedList();
 	current_ants=0;
 	antFood = 0;
-	addAnt();
-	addAnt();
-	addAnt();
+	ants->addAnt();
+	ants->addAnt();
+	ants->addAnt();
 	
 }
 AntHill::~AntHill(){
-	for(int i=0; i< current_ants; i++){
+	delete ants;
+	/*for(int i=0; i< current_ants; i++){
 		delete ants[i];
 	}
 	delete[] ants;
+	*/
 }
-int AntHill::addAnt(){
+void AntHill::addAnt(){
 /*
 	if(ants == NULL){
 		ants = new Ant*[1];
@@ -34,9 +36,10 @@ int AntHill::addAnt(){
 	*/
 	ants->addAnt();
 	current_ants++;
-	return ants[current_ants -1]->getID();
 }
 bool AntHill::removeAnt(int antID){
+	ants->deleteAnt(antID);
+/*
 	if(ants == NULL){
 		return false;
 	}
@@ -69,31 +72,41 @@ bool AntHill::removeAnt(int antID){
 			return true;
 		}
 	}
+	*/
 }
 Ant * AntHill::getAnt(int antID){
+	return ants->findAnt(antID);
+	/*
 	for(int i = 0; i< current_ants; i++){
 		if(ants[i]->getID()== antID){
 			return ants[i];
 		}
 	}
 	return NULL;
+	*/
 }
 void AntHill::move(){
+	Node * temp = ants->head;
+	while(temp != NULL){
+		temp->currAnt->move();
+		temp = temp->next;
+	}
+/*
 	for(int i = 0; i < current_ants; i++){
 		ants[i]->move();
 	}
+	*/
 }
 void AntHill::printHillInfo(){
-	for(int i = 0; i < current_ants; i++){
+	/*for(int i = 0; i < current_ants; i++){
 		cout<<"Ant#"<<i<<"["<<ants[i]->getX()<<","<<ants[i]->getY()<<"]\n";
 	}
+	*/
 }
 void turn(){
-	
-}
-void writeToLog(string){
-	ofstream logfile;
-	logfile.open("anthill.log");
-	logfile<< string;
-	logfile.close();
+	/*move();
+	if(rand()%5 == 0){
+		//antHillAttacked();
+	}
+	*/
 }

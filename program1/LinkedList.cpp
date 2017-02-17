@@ -81,7 +81,7 @@ Ant * LinkedList::findAnt(int id){
 		findID = findID->next;
 		if(findID->currAnt->getID() == id){return findID->currAnt;}
 	}
-	
+	return NULL;
 };
 void LinkedList::printLinkedList(){
 	Node * temp = head;
