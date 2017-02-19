@@ -106,3 +106,10 @@ LinkedList& LinkedList::operator<<(Ant * anAnt){
 		head = newNode;
 	}
 };
+void LinkedList::moveAll(){
+	Node * temp = head;
+	while(temp != NULL){
+		temp->currAnt->move();
+		temp = temp->next;
+	}
+};

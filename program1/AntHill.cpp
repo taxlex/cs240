@@ -86,11 +86,7 @@ Ant * AntHill::getAnt(int antID){
 	*/
 }
 void AntHill::move(){
-	Node * temp = ants->head;
-	while(temp != NULL){
-		temp->currAnt->move();
-		temp = temp->next;
-	}
+	ants->moveAll();
 /*
 	for(int i = 0; i < current_ants; i++){
 		ants[i]->move();

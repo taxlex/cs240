@@ -20,6 +20,7 @@ class LinkedList{
 		Ant * findAnt(int);
 		void printLinkedList();
 		LinkedList& operator<<(Ant *);
+		void moveAll();
 		//LinkedList& operator<<(Ant);
 	private:
 		Node *head;
