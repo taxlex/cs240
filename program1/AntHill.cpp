@@ -1,7 +1,8 @@
 #include "AntHill.h"
 #include <iostream>
 #include <cstdlib>
-#include <cstring>
+#include <string>
+#include <fstream>
 
 using namespace std;
 AntHill::AntHill(){
@@ -85,14 +86,6 @@ Ant * AntHill::getAnt(int antID){
 	return NULL;
 	*/
 }
-void AntHill::move(){
-	ants->moveAll();
-/*
-	for(int i = 0; i < current_ants; i++){
-		ants[i]->move();
-	}
-	*/
-}
 void AntHill::printHillInfo(){
 	/*for(int i = 0; i < current_ants; i++){
 		cout<<"Ant#"<<i<<"["<<ants[i]->getX()<<","<<ants[i]->getY()<<"]\n";
@@ -100,12 +93,23 @@ void AntHill::printHillInfo(){
 	*/
 }
 void AntHill::turn(){
-	move();
-	antHillAttacked();
-	//antOneOnOne();
+	ofstream log;
+	log.open("anthill.log");
+	log << "hello\n";
+	log.close();
+	int antsKilledInAttack = 0;
+	ants->moveAll();
+	if(rand()%5 == 0){
+		int attackers = 1 + rand()%currentAnts;
+		antsKilledInAttack = ants->attacked(attackers);
+		cout << "The anthill was attacked! ";
+		if(antsKilledInAttack > 0){
+			cout << antsKilledInAttack;
+			cout << "lost there lives defending the hill\n";
+		}
+	}
+	antFood += ants->antOneOnOneFindFood();
+	for(antFood; antFood>=0; antFood--){
+		addAnt();
+	}
 }
-void AntHill::antHillAttacked(){
-	int attackers = 1 + rand()%currentAnts;
-	ants->attacked(attackers);
-	
-};

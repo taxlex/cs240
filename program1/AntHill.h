@@ -13,9 +13,7 @@ class AntHill{
 		Ant * getAnt(int);
 		void printHillInfo();
 		int getCurrentNumAnts(){return currentAnts;}
-		void move();
 		void turn();
-		void antHillAttacked();
 	private:
 		int currentAnts;
 		LinkedList * ants;

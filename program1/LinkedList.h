@@ -21,7 +21,8 @@ class LinkedList{
 		void printLinkedList();
 		LinkedList& operator<<(Ant *);
 		void moveAll();
-		bool attacked(int);
+		int attacked(int);
+		int antOneOnOneFindFood();
 		//LinkedList& operator<<(Ant);
 	private:
 		Node *head;

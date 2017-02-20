@@ -113,9 +113,9 @@ void LinkedList::moveAll(){
 		temp = temp->next;
 	}
 };
-bool LinkedList::attacked(int attackers){
-	bool defended = false;
+int LinkedList::attacked(int attackers){
 	int defenders = 0;
+	int antHillAntsKilled;
 	Node * temp = head;
 	while(temp != NULL){
 		if(temp->currAnt->getX() >= -25 && temp->currAnt->getX() <= 25 && temp->currAnt->getY() >= -25 && temp->currAnt->getY() <= 25 ){
@@ -123,14 +123,34 @@ bool LinkedList::attacked(int attackers){
 		}
 		temp = temp->next;
 	}
-	if(defenders > attackers) defended = true;
+	if(defenders > attackers)antHillAntsKilled = 0;
 	else{
 		while(temp != NULL){
 			if(temp->currAnt->getX() >= -25 && temp->currAnt->getX() <= 25 && temp->currAnt->getY() >= -25 && temp->currAnt->getY() <= 25 ){
+			antHillAntsKilled++;
 			deleteAnt(temp->currAnt->getID());
 			}
 			temp = temp->next;
 		}
 	}
-	return defended;
+	return antHillAntsKilled;
+};
+int LinkedList::antOneOnOneFindFood(){
+	int food = 0;
+	Node * temp = head;
+	while(temp != NULL){
+		if(rand()%5 == 0){
+			if(rand()%2 == 0){
+				deleteAnt(temp->currAnt->getID());
+			}
+			else food++;
+		}
+		else{
+			if(rand()%5 == 0){
+				food++;
+			}
+		}
+		temp = temp->next;
+	}
+	return food;
 };
