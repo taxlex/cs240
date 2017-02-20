@@ -12,11 +12,12 @@ class AntHill{
 		bool removeAnt(int);
 		Ant * getAnt(int);
 		void printHillInfo();
-		int getCurrentNumAnts(){return current_ants;}
+		int getCurrentNumAnts(){return currentAnts;}
 		void move();
 		void turn();
+		void antHillAttacked();
 	private:
-		int current_ants;
+		int currentAnts;
 		LinkedList * ants;
 		int antFood;
 };

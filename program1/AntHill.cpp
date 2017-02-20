@@ -6,7 +6,7 @@
 using namespace std;
 AntHill::AntHill(){
 	ants = new LinkedList();
-	current_ants=0;
+	currentAnts=0;
 	antFood = 0;
 	ants->addAnt();
 	ants->addAnt();
@@ -35,7 +35,7 @@ void AntHill::addAnt(){
 	ants[current_ants] = new Ant(next_id);
 	*/
 	ants->addAnt();
-	current_ants++;
+	currentAnts++;
 }
 bool AntHill::removeAnt(int antID){
 	ants->deleteAnt(antID);
@@ -99,10 +99,13 @@ void AntHill::printHillInfo(){
 	}
 	*/
 }
-void turn(){
-	/*move();
-	if(rand()%5 == 0){
-		//antHillAttacked();
-	}
-	*/
+void AntHill::turn(){
+	move();
+	antHillAttacked();
+	//antOneOnOne();
 }
+void AntHill::antHillAttacked(){
+	int attackers = 1 + rand()%currentAnts;
+	ants->attacked(attackers);
+	
+};

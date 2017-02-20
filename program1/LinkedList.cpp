@@ -113,3 +113,24 @@ void LinkedList::moveAll(){
 		temp = temp->next;
 	}
 };
+bool LinkedList::attacked(int attackers){
+	bool defended = false;
+	int defenders = 0;
+	Node * temp = head;
+	while(temp != NULL){
+		if(temp->currAnt->getX() >= -25 && temp->currAnt->getX() <= 25 && temp->currAnt->getY() >= -25 && temp->currAnt->getY() <= 25 ){
+			defenders++;
+		}
+		temp = temp->next;
+	}
+	if(defenders > attackers) defended = true;
+	else{
+		while(temp != NULL){
+			if(temp->currAnt->getX() >= -25 && temp->currAnt->getX() <= 25 && temp->currAnt->getY() >= -25 && temp->currAnt->getY() <= 25 ){
+			deleteAnt(temp->currAnt->getID());
+			}
+			temp = temp->next;
+		}
+	}
+	return defended;
+};

@@ -21,6 +21,7 @@ class LinkedList{
 		void printLinkedList();
 		LinkedList& operator<<(Ant *);
 		void moveAll();
+		bool attacked(int);
 		//LinkedList& operator<<(Ant);
 	private:
 		Node *head;
