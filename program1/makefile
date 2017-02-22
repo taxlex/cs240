@@ -1,4 +1,4 @@
-PROJ = project1
+PROJ = program1
 SOURCE1 = Ant
 SOURCE2 = AntHill
 SOURCE3 = LinkedList

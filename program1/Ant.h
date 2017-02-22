@@ -5,6 +5,7 @@ using namespace std;
 class Ant{
 	public:
 		Ant(int);
+		Ant(const Ant&);
 		void move();
 		int getID(){return id;}
 		int getX(){return x;}

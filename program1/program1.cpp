@@ -1,24 +1,25 @@
+#include "AntHill.h"
+#include "AntHill.h"
+#include "Ant.h"
+#include "Ant.h"
 #include <iostream>
-#include "LinkedList.h"
+#include <cstdlib>
+#include <ctime>
 
+using namespace std;
+
+#define END_SIM 100
 int main(){
-	LinkedList * a = new LinkedList();
-	for(int i =0; i < 20 ; i++){
-		a->addAnt();
-		
+	srand(time(NULL));
+
+	cerr << "\n\tTEST #1: Run AntFarm Simulation" << endl;
+	AntHill * farm = new AntHill();
+	while(farm->getCurrentNumAnts() > 0 && farm->getCurrentNumAnts() < END_SIM){
+		farm->turn();
 	}
-	cout<<"checkpoint 1"<<endl;
-	LinkedList* b = new LinkedList(*a);
-	a->deleteAnt(0);
-	a->printLinkedList();
-	b->printLinkedList();
-	Ant * an = new Ant(55);
-	Ant * bn = new Ant(66);
-	*b<<an<<bn;
-	b->printLinkedList();
-	delete a;
-	delete b;
+	delete farm;
+	cerr << "\n\t========================PASS========================\n" << endl;
+	cerr << "\n\tDon't forget to run with Valgrind and submit to Blackboard!\n" << endl;
 
-
-return 0;
+	return 0;
 }

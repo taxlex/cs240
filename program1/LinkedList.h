@@ -22,7 +22,7 @@ class LinkedList{
 		LinkedList& operator<<(Ant *);
 		void moveAll();
 		int attacked(int);
-		int antOneOnOneFindFood();
+		int antOneOnOneFindFood(int *);
 		//LinkedList& operator<<(Ant);
 	private:
 		Node *head;

@@ -1,16 +1,17 @@
 #include "LinkedList.h"
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
 
 using namespace std;
 Node::Node(Ant * aCurrAnt){
 	currAnt = aCurrAnt;
 	next = NULL;
-};
+}
 LinkedList::LinkedList(){
 	head = NULL;
 	nextID = 0;
-};
+}
 LinkedList::LinkedList(const LinkedList& Ll){
 	Node* tempLl = Ll.head;
 	this->head = new Node(Ll.head->currAnt);
@@ -21,7 +22,7 @@ LinkedList::LinkedList(const LinkedList& Ll){
 		temp = temp->next;
 		tempLl = tempLl->next;
 	}
-};
+}
 LinkedList::~LinkedList(){
 	Node* current = head;
 	while( current != NULL ) {
@@ -31,7 +32,7 @@ LinkedList::~LinkedList(){
 		current = next;
 	}
 	head = NULL;
-};
+}
 void LinkedList::addAnt(){
 	Ant * newAnt = new Ant(nextID);
 	nextID++;
@@ -48,12 +49,19 @@ void LinkedList::addAnt(){
 	else{
 		head = newNode;
 	}
-};
+}
 void LinkedList::deleteAnt(int id){
 	Node * findID = head;
+	//deals with deleting only element
+	if(head->currAnt->getID() == id && head->next == NULL){
+		delete findID->currAnt;
+		delete findID;
+		head = NULL;
+	}
 	//deals with deleting the first element
-	if(head->currAnt->getID() == id){
+	else if(head->currAnt->getID() == id){
 		head = head->next;
+		delete findID->currAnt;
 		delete findID;
 	}
 	else{
@@ -70,10 +78,11 @@ void LinkedList::deleteAnt(int id){
 		//links together the gap that wll be made after deleting an ant
 		prev->next = findID->next;
 		//deletes the ant
+		delete findID->currAnt;
 		delete findID;
 	}
 	
-};
+}
 Ant * LinkedList::findAnt(int id){
 	Node * findID = head;
 	if(findID == NULL){return 0;}
@@ -82,7 +91,7 @@ Ant * LinkedList::findAnt(int id){
 		if(findID->currAnt->getID() == id){return findID->currAnt;}
 	}
 	return NULL;
-};
+}
 void LinkedList::printLinkedList(){
 	Node * temp = head;
 	while(temp != NULL){
@@ -90,7 +99,7 @@ void LinkedList::printLinkedList(){
 		temp = temp->next;
 	}
 	cout<< endl;
-};
+}
 LinkedList& LinkedList::operator<<(Ant * anAnt){
 	Node * newNode = new Node(anAnt);
 	
@@ -105,52 +114,87 @@ LinkedList& LinkedList::operator<<(Ant * anAnt){
 	else{
 		head = newNode;
 	}
-};
+}
 void LinkedList::moveAll(){
 	Node * temp = head;
 	while(temp != NULL){
 		temp->currAnt->move();
 		temp = temp->next;
 	}
-};
+}
+/*****
+Defenders of the ant hill are those ants that are within 15 units from the 0,0 coordinate, if there are more defenders than attackers then nothing happens, if the defenders are defeated they all die note: only those within 15 units from the center are killed
+*****/
 int LinkedList::attacked(int attackers){
 	int defenders = 0;
-	int antHillAntsKilled;
+	int antHillAntsKilled =0;
 	Node * temp = head;
 	while(temp != NULL){
-		if(temp->currAnt->getX() >= -25 && temp->currAnt->getX() <= 25 && temp->currAnt->getY() >= -25 && temp->currAnt->getY() <= 25 ){
+		if(temp->currAnt->getX() >= -15 && temp->currAnt->getX() <= 15 && temp->currAnt->getY() >= -15 && temp->currAnt->getY() <= 15 ){
 			defenders++;
 		}
 		temp = temp->next;
 	}
 	if(defenders > attackers)antHillAntsKilled = 0;
 	else{
+		Node * tempNext = head->next;
+		temp = head;
 		while(temp != NULL){
-			if(temp->currAnt->getX() >= -25 && temp->currAnt->getX() <= 25 && temp->currAnt->getY() >= -25 && temp->currAnt->getY() <= 25 ){
+			tempNext = temp->next;
+			if(temp->currAnt->getX() >= -15 && temp->currAnt->getX() <= 15 && temp->currAnt->getY() >= -15 && temp->currAnt->getY() <= 15 ){
 			antHillAntsKilled++;
 			deleteAnt(temp->currAnt->getID());
 			}
-			temp = temp->next;
+			temp = tempNext;
 		}
 	}
 	return antHillAntsKilled;
-};
-int LinkedList::antOneOnOneFindFood(){
+}
+/*****
+Each ant in the linked list has a chance of encountering a rival ant which may kill them, if an ant does not encounter a rival ant it has a chance of finding food, in order to return the amount of food found and ants killed by rival ants the function takes an int * as an argument
+*****/
+int LinkedList::antOneOnOneFindFood(int *antsKilled){
 	int food = 0;
+	int antsKilledOneOnOne = 0;
 	Node * temp = head;
+	Node * tempNext = head->next;
 	while(temp != NULL){
+		tempNext = temp->next;
 		if(rand()%5 == 0){
 			if(rand()%2 == 0){
+				antsKilledOneOnOne++;
 				deleteAnt(temp->currAnt->getID());
 			}
-			else food++;
 		}
 		else{
-			if(rand()%5 == 0){
+			if(rand()%3 == 0){
 				food++;
 			}
 		}
-		temp = temp->next;
+		temp = tempNext;
 	}
+	*antsKilled = antsKilledOneOnOne;
+	ofstream log;
+	log.open("anthill.log", ios_base::app);
+	if(antsKilledOneOnOne == 0){
+		log<<"no ants lost a one on one fight this turn"<<endl;
+	}
+	if(antsKilledOneOnOne == 1){
+		log<<antsKilledOneOnOne<<" ant picked a fight he couldn't win this turn"<<endl;
+	}
+	if(antsKilledOneOnOne > 1){
+		log<<antsKilledOneOnOne<<" ants picked a fight they couldn't win this turn"<<endl;
+	}
+	
+	if(food == 0){
+		log<<"no ants found food this turn"<<endl;
+	}
+	if(food == 1){
+		log<<food<<" ant found food this turn"<<endl;
+	}
+	if(food > 1){
+		log<<food<<" ants found food this turn"<<endl;
+	}
+	log.close();
 	return food;
-};
+}

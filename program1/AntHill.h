@@ -11,13 +11,13 @@ class AntHill{
 		void addAnt();
 		bool removeAnt(int);
 		Ant * getAnt(int);
-		void printHillInfo();
 		int getCurrentNumAnts(){return currentAnts;}
 		void turn();
 	private:
 		int currentAnts;
 		LinkedList * ants;
 		int antFood;
+		int turnNum;
 };
 
 #endif
