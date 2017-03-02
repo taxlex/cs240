@@ -40,13 +40,14 @@ bool Queue<T>::enqueue(T data){
 }
 template <class T>
 T Queue<T>::dequeue(){
-	T temp = *list->head->currentData;
+	T temp = list->head->currentData;
 	list->remove(temp);
+	tot--;
 	return temp;
 }
 template <class T>
 T Queue<T>::peek(){
-	return *list->head->currentData;
+	return list->head->currentData;
 }
 template <class T>
 bool Queue<T>::empty(){

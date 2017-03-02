@@ -9,8 +9,9 @@ class Deck{
 		Deck();
 		Card draw();
 		bool empty();
+		void shuffle();
 	private:
-		Queue<Card> * stack;
+		Queue<Card*> stack;
 };
 
 #endif

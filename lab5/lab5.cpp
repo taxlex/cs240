@@ -12,7 +12,7 @@
 #include <ctime>
 #include <cstdlib>
 
-#define EXTRA_CREDIT 0
+#define EXTRA_CREDIT 1
 
 using namespace std;
 
@@ -126,9 +126,9 @@ int main(){
 		if(card2 == card3 || card3 == card4){
 			unshuffled--;
 		}
-		// cerr << "C2[" << card2.getSuit() << "," << card2.getValue() << "]\t";
-		// cerr << "C3[" << card3.getSuit() << "," << card3.getValue() << "]\t";
-		// cerr << "C4[" << card4.getSuit() << "," << card4.getValue() << "]" << endl;
+		//cerr << "C2[" << card2.getSuit() << "," << card2.getValue() << "]\t";
+		//cerr << "C3[" << card3.getSuit() << "," << card3.getValue() << "]\t";
+		//cerr << "C4[" << card4.getSuit() << "," << card4.getValue() << "]" << endl;
 
 		assert(unshuffled > 0);
 	}

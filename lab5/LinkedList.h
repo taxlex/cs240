@@ -10,13 +10,13 @@ using namespace std;
 template <class T>
 class Node{
 	public:
-		Node(T *);
+		Node(T);
 		Node * nextNode;
-		T * currentData;
+		T currentData;
 		template<class T2> friend class Queue;
 };
 template <class T>
-Node<T>::Node(T * currentData){
+Node<T>::Node(T currentData){
 	this->currentData = currentData;
 	this->nextNode = NULL;
 };
@@ -58,7 +58,6 @@ LinkedList<T>::~LinkedList(){
 	Node<T>* current = head;
 	while(current != NULL){
 		Node<T>* next = current->nextNode;
-		delete current->currentData;
 		delete current;
 		current = next;
 	}
@@ -66,7 +65,7 @@ LinkedList<T>::~LinkedList(){
 }
 template <class T>
 void LinkedList<T>::insert(T data){
-	Node<T> * newNode = new Node<T>(&data);
+	Node<T> * newNode = new Node<T>(data);
 	Node<T> * findEnd = head;
 	if(findEnd != NULL){
 		while(findEnd->nextNode != NULL){
@@ -86,7 +85,7 @@ T& LinkedList<T>::read(){
 	if(iterator == NULL && head == NULL){
 		cout<<"List is empty"<<endl;
 	}
-	T &temp = *iterator->currentData;
+	T &temp = iterator->currentData;
 	iterator = iterator->nextNode;
 	return temp;
 }
@@ -98,33 +97,33 @@ bool LinkedList<T>::empty(){
 template <class T>
 bool LinkedList<T>::remove(T& data){
 	Node<T> * findData = head;
+	//if the LinkedList is empty it returns false
+	if(findData == NULL) return false;
 	//deals with deleting only element
-	if(*head->currentData == data && head->nextNode == NULL){
-		delete findData->currentData;
+	
+	if(findData->currentData == data && findData->nextNode == NULL){
 		delete findData;
 		head = NULL;
 		return true;
 	}
 	//deals with deleting the first element
-	else if(*head->currentData == data){
+	else if(findData->currentData == data){
 		head = head->nextNode;
-		delete findData->currentData;
 		delete findData;
 	}
 	else{
-		//if the LinkedList is empty it returns false
-		if(findData == NULL) return false;
 		//variable to keep track of previous node
 		Node<T> * previous = NULL;
 		//goes through each node until it reaches the correct data or end
 		while(findData != NULL){
 			previous = findData;
 			findData = findData->nextNode;
-			if(*findData->currentData == data) break;
+			if(findData->currentData == data){
+				break;
+			}
 		}
 		if(findData != NULL){
 			previous->nextNode = findData->nextNode;
-			delete findData->currentData;
 			delete findData;
 			return true;
 		} 
