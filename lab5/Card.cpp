@@ -10,5 +10,6 @@ Card::Card(int suit, int value){
 }
 bool Card::operator==(const Card &other){
 	if(this->value != other.value) return false;
+	if(this->suit != other.suit) return false;
 	return true;
 }
