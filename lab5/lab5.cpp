@@ -1,18 +1,18 @@
 #include "LinkedList.h"
-//#include "Queue.h"
+#include "Queue.h"
 #include "LinkedList.h"
-//#include "Queue.h"
-//#include "Deck.h"
-//#include "Card.h"
-//#include "Deck.h"
-//#include "Card.h"
+#include "Queue.h"
+#include "Deck.h"
+#include "Card.h"
+#include "Deck.h"
+#include "Card.h"
 #include <iostream>
 #include <cassert>
 #include <string>
 #include <ctime>
 #include <cstdlib>
 
-#define EXTRA_CREDIT 1
+#define EXTRA_CREDIT 0
 
 using namespace std;
 
@@ -24,7 +24,7 @@ int main(){
 	list.insert(5);
 	assert(list.read() == 5);
 	cerr << "\n\t========================PASS========================\n" << endl;
-/*
+
 	cerr << "\n\tTEST #2: Test create a Card List" << endl;
 	LinkedList<Card*> cards_list;
 	cards_list.insert(new Card(1, 14));
@@ -134,7 +134,7 @@ int main(){
 	}
 	cerr << "\n\t========================PASS========================\n" << endl;
 #endif
-*/
+
 	cerr << "\n\tAll Tests Passed.\nDon't forget to run with Valgrind and submit to Blackboard!\n" << endl;
 	return 0;
 }

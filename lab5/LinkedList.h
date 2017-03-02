@@ -13,6 +13,7 @@ class Node{
 		Node(T *);
 		Node * nextNode;
 		T * currentData;
+		template<class T2> friend class Queue;
 };
 template <class T>
 Node<T>::Node(T * currentData){
@@ -29,6 +30,7 @@ class LinkedList{
 		T& read();
 		bool empty();
 		bool remove(T&);
+		template<class T2> friend class Queue;
 	private:
 		Node<T> *head;
 		Node<T> *iterator;
@@ -84,7 +86,7 @@ T& LinkedList<T>::read(){
 	if(iterator == NULL && head == NULL){
 		cout<<"List is empty"<<endl;
 	}
-	T temp = new *iterator->currentData;
+	T &temp = *iterator->currentData;
 	iterator = iterator->nextNode;
 	return temp;
 }
