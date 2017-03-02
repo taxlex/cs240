@@ -99,14 +99,14 @@ template <class T>
 bool LinkedList<T>::remove(T& data){
 	Node<T> * findData = head;
 	//deals with deleting only element
-	if(head->currentData == &data && head->nextNode == NULL){
+	if(*head->currentData == data && head->nextNode == NULL){
 		delete findData->currentData;
 		delete findData;
 		head = NULL;
 		return true;
 	}
 	//deals with deleting the first element
-	else if(head->currentData == &data){
+	else if(*head->currentData == data){
 		head = head->nextNode;
 		delete findData->currentData;
 		delete findData;
@@ -120,7 +120,7 @@ bool LinkedList<T>::remove(T& data){
 		while(findData != NULL){
 			previous = findData;
 			findData = findData->nextNode;
-			if(findData->currentData == &data) break;
+			if(*findData->currentData == data) break;
 		}
 		if(findData != NULL){
 			previous->nextNode = findData->nextNode;
