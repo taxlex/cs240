@@ -5,7 +5,7 @@ Deck::Deck(){
 	for(int i = 2; i< 53; i++){
 		for(int y = 1; y < 5; y++){
 			Card * temp = new Card(y,i); 
-			stack->enqueue(temp);
+			stack->enqueue(*temp);
 		}
 	}
 }

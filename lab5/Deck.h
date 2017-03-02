@@ -10,7 +10,7 @@ class Deck{
 		Card draw();
 		bool empty();
 	private:
-		Queue<Card> stack;
+		Queue<Card> * stack;
 };
 
 #endif

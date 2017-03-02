@@ -2,7 +2,7 @@ PROJ = lab5
 SOURCE1 = Card
 SOURCE2 = Deck
 #SOURCE3 = 
-OBJECTS = $(PROJ).o
+OBJECTS = $(PROJ).o Card.o Deck.o
 DEBUG = -g
 
 all: $(OBJECTS)

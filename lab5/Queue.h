@@ -31,7 +31,6 @@ template <class T>
 Queue<T>::~Queue(){
 	clear();
 	delete list;
-	delete tot;
 }
 template <class T>
 bool Queue<T>::enqueue(T data){
@@ -57,7 +56,7 @@ template <class T>
 void Queue<T>::clear(){
 	while(tot !=0){
 		T temp = dequeue();
-		delete T;
+		delete &temp;
 		tot--;
 	}
 }
