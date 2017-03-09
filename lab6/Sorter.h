@@ -4,6 +4,8 @@
 #include <vector>
 #include <list>
 #include <algorithm>
+#include <random>
+#include <chrono>
 #include <stdlib.h>
 
 using namespace std;
@@ -54,15 +56,16 @@ void Sorter<T>::shuffle(){
 		values = temp;
 	}
 */
-	random_shuffle(values->begin(), values->end(), values);
+	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+	shuffle(values->begin(), values->end(),default_random_engine(seed));
 }
 template <class T>
 typename T::iterator operator[](int i){
-	typename T::iterator iter = values.begin();
-	for(int y = 0; iter != values->end() && y <= i; iter++){
-		y++;
-	} 
-	return iter;
+	if(i<= values.size()){
+		typename T::iterator iter = values->begin();
+		iter += i;
+		return iter;
+	}
 }
 
 
