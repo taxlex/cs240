@@ -26,7 +26,7 @@ int main () {
     my_list_sorter.shuffle();
 
     cerr << "\n\t========================PASS========================\n" << endl;
-/*
+
     cerr << "\n\tTEST #2: Test insertion and shuffle of a single value Sorter Object" << endl;
 
     my_vector_sorter.insert(5);
@@ -64,7 +64,7 @@ int main () {
     assert(my_list_sorter.size() == 0);
 
     cerr << "\n\t========================PASS========================\n" << endl;
-
+/*
     cerr << "\n\tTEST #4: Test bubble sort of a multiple values" << endl;
 
     for(int i = 0; i < DEFAULT_NUMVALUES; i++){

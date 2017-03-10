@@ -2,7 +2,7 @@ PROJ = lab6
 SOURCE1 = Sorter
 #SOURCE2 =
 #SOURCE3 = 
-OBJECTS = $(PROJ).o Card.o Deck.o
+OBJECTS = $(PROJ).o
 DEBUG = -g
 
 all: $(OBJECTS)

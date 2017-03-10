@@ -4,8 +4,6 @@
 #include <vector>
 #include <list>
 #include <algorithm>
-#include <random>
-#include <chrono>
 #include <stdlib.h>
 
 using namespace std;
@@ -40,30 +38,26 @@ void Sorter<T>::insert(int i){
 }
 template <class T>
 void Sorter<T>::shuffle(){
-/*
-	T::iterator iter;
-	int runs = rand()%25;
-	runs += 50;
-	for(int i = 0; i < runs; i++){
-		T temp.clear();
-		unsigned int runs = rand()%values.size();
-		for(iter = values.begin(); iter != values.end()-runs; iter++){
-			temp.push_back(values[iter]);
-		}
-		for(; iter != values.end(); iter++){
-			temp.push_front(values[iter]);
-		}
-		values = temp;
+	vector<int> temp;
+	typename T::iterator iter;
+	for(iter = values->begin(); iter != values->end(); iter++){
+		temp.push_back(*iter);
 	}
-*/
-	unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-	shuffle(values->begin(), values->end(),default_random_engine(seed));
+	random_shuffle(temp.begin(),temp.end());
+	values->clear();
+	vector<int>::iterator it;
+	for(it = temp.begin(); it != temp.end(); it++){
+		values->push_back(*it);
+	}
 }
 template <class T>
-typename T::iterator operator[](int i){
-	if(i<= values.size()){
-		typename T::iterator iter = values->begin();
-		iter += i;
+typename T::iterator Sorter<T>::operator[](int i){
+	if(i<= values->size()){
+		typename T::iterator iter;
+		int y = 0;
+		for(iter = values->begin(); iter != values->end() && y < i+1; iter++){
+			y++;
+		}
 		return iter;
 	}
 }
