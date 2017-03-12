@@ -64,7 +64,7 @@ int main () {
     assert(my_list_sorter.size() == 0);
 
     cerr << "\n\t========================PASS========================\n" << endl;
-/*
+
     cerr << "\n\tTEST #4: Test bubble sort of a multiple values" << endl;
 
     for(int i = 0; i < DEFAULT_NUMVALUES; i++){
@@ -84,7 +84,7 @@ int main () {
     assert(my_list_sorter.size() == DEFAULT_NUMVALUES);
 
     cerr << "\n\t========================PASS========================\n" << endl;
-
+/*
     cerr << "\n\tTEST #5: Test selection sort of a multiple values" << endl;
 
     my_vector_sorter.shuffle();

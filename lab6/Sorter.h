@@ -5,6 +5,7 @@
 #include <list>
 #include <algorithm>
 #include <stdlib.h>
+#include <iostream>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class Sorter{
 		void insert(int);
 		void shuffle();
 		typename T::iterator operator[](int i);
+		void bubbleSort();
 	private:
 		T * values;
 };
@@ -55,13 +57,48 @@ typename T::iterator Sorter<T>::operator[](int i){
 	if(i<= values->size()){
 		typename T::iterator iter;
 		int y = 0;
-		for(iter = values->begin(); iter != values->end() && y < i+1; iter++){
+		for(iter = values->begin(); iter != values->end() && y < i; iter++){
 			y++;
 		}
 		return iter;
 	}
 }
-
+template <class T>
+void Sorter<T>::bubbleSort(){
+	vector<int> temp;
+	typename T::iterator iter;
+	for(iter = values->begin(); iter != values->end(); iter++){
+		temp.push_back(*iter);
+	}
+	int tempA = 0;
+	for(int y = 0; y<temp.size(); y++){
+		for(int i = 0; i < temp.size()-1; i++){
+			if(temp[i] > temp[i+1]){
+				tempA=temp[i];
+				temp[i]=temp[i+1];
+				temp[i+1] = tempA;
+			}
+		}
+	}
+	values->clear();
+	vector<int>::iterator it;
+	for(it = temp.begin(); it != temp.end(); it++){
+		values->push_back(*it);
+	}
+	/*
+	int tempA;
+	for(int y = 0; y<values->size(); y++){
+		for(int i = 0; i < values->size()-1; i++){
+			if(values[i] > values[i+1]){
+				tempA=values[i];
+				values->insert(i,values[i+1]);
+				values->insert(i+1,tempA);
+			}
+		}
+	}
+	*/
+	
+}
 
 
 
