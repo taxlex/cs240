@@ -19,6 +19,7 @@ class Sorter{
 		void shuffle();
 		typename T::iterator operator[](int i);
 		void bubbleSort();
+		void selectionSort();
 	private:
 		T * values;
 };
@@ -99,7 +100,35 @@ void Sorter<T>::bubbleSort(){
 	*/
 	
 }
-
+template <class T>
+void Sorter<T>::selectionSort(){
+	vector<int> temp;
+	typename T::iterator iter;
+	for(iter = values->begin(); iter != values->end(); iter++){
+		temp.push_back(*iter);
+	}
+	int minIndex = 0;
+	int sortedIndex = 0;
+	int tempVal = 0;
+	for(int y = 0; y<temp.size(); y++){
+		minIndex = y;
+		for(int i = y; i < temp.size(); i++){
+			if(temp[i] < temp[minIndex]){
+				minIndex = i;
+			}
+		}
+		tempVal = temp[minIndex];
+		temp[minIndex] = temp[sortedIndex];
+		temp[sortedIndex] = tempVal;
+		sortedIndex++;
+	}
+	values->clear();
+	vector<int>::iterator it;
+	for(it = temp.begin(); it != temp.end(); it++){
+		values->push_back(*it);
+	}
+	
+}
 
 
 
