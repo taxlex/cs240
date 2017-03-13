@@ -99,7 +99,7 @@ int main () {
     assert(my_list_sorter.size() == DEFAULT_NUMVALUES);
 
     cerr << "\n\t========================PASS========================\n" << endl;
-/*
+
     cerr << "\n\tTEST #6: Test insertion sort of a multiple values" << endl;
 
     my_vector_sorter.shuffle();
@@ -165,6 +165,6 @@ int main () {
     assert(my_list_sorter.size() == MAX_NUMVALUES);
     cerr << "\n\t========================PASS========================\n" << endl;
     cerr << "\n\tAll Tests Passed.\nDon't forget to run with Valgrind and submit to Blackboard!\n" << endl;
-*/
+
     return 0;
 }

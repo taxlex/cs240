@@ -13,6 +13,7 @@ template <class T>
 class Sorter{
 	public:
 		Sorter();
+		~Sorter();
 		void clear();
 		unsigned int size();
 		void insert(int);
@@ -20,12 +21,17 @@ class Sorter{
 		typename T::iterator operator[](int i);
 		void bubbleSort();
 		void selectionSort();
+		void insertionSort();
 	private:
 		T * values;
 };
 template <class T>
 Sorter<T>::Sorter(){
 	values = new T;
+}
+template <class T>
+Sorter<T>::~Sorter(){
+	delete values;
 }
 template <class T>
 void Sorter<T>::clear(){
@@ -121,6 +127,34 @@ void Sorter<T>::selectionSort(){
 		temp[minIndex] = temp[sortedIndex];
 		temp[sortedIndex] = tempVal;
 		sortedIndex++;
+	}
+	values->clear();
+	vector<int>::iterator it;
+	for(it = temp.begin(); it != temp.end(); it++){
+		values->push_back(*it);
+	}
+	
+}
+
+
+template <class T>
+void Sorter<T>::insertionSort(){
+	vector<int> temp;
+	typename T::iterator iter;
+	for(iter = values->begin(); iter != values->end(); iter++){
+		temp.push_back(*iter);
+	}
+	int sortedIndex;
+	int tempVal;
+	for(int i = 1; i < temp.size(); i++){
+		sortedIndex = i;
+		tempVal = temp[i];
+
+		while(sortedIndex > 0 && temp[sortedIndex-1] > tempVal){
+			temp[sortedIndex] = temp[sortedIndex -1];
+			sortedIndex--;
+		}
+		temp[sortedIndex] = tempVal;
 	}
 	values->clear();
 	vector<int>::iterator it;
