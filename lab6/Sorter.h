@@ -72,6 +72,7 @@ typename T::iterator Sorter<T>::operator[](int i){
 }
 template <class T>
 void Sorter<T>::bubbleSort(){
+	//makes a vector temp that will be used to sort the values
 	vector<int> temp;
 	typename T::iterator iter;
 	for(iter = values->begin(); iter != values->end(); iter++){
@@ -92,22 +93,11 @@ void Sorter<T>::bubbleSort(){
 	for(it = temp.begin(); it != temp.end(); it++){
 		values->push_back(*it);
 	}
-	/*
-	int tempA;
-	for(int y = 0; y<values->size(); y++){
-		for(int i = 0; i < values->size()-1; i++){
-			if(values[i] > values[i+1]){
-				tempA=values[i];
-				values->insert(i,values[i+1]);
-				values->insert(i+1,tempA);
-			}
-		}
-	}
-	*/
 	
 }
 template <class T>
 void Sorter<T>::selectionSort(){
+	//makes a vector temp that will be used to sort the values
 	vector<int> temp;
 	typename T::iterator iter;
 	for(iter = values->begin(); iter != values->end(); iter++){
@@ -139,6 +129,7 @@ void Sorter<T>::selectionSort(){
 
 template <class T>
 void Sorter<T>::insertionSort(){
+	//makes a vector temp that will be used to sort the values
 	vector<int> temp;
 	typename T::iterator iter;
 	for(iter = values->begin(); iter != values->end(); iter++){
