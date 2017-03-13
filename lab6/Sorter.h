@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
@@ -78,9 +79,11 @@ void Sorter<T>::bubbleSort(){
 	for(iter = values->begin(); iter != values->end(); iter++){
 		temp.push_back(*iter);
 	}
+	clock_t t;
+	t = clock();
 	int tempA = 0;
 	for(int y = 0; y<temp.size(); y++){
-		for(int i = 0; i < temp.size()-1; i++){
+		for(int i = 0; i < temp.size()-1-y; i++){
 			if(temp[i] > temp[i+1]){
 				tempA=temp[i];
 				temp[i]=temp[i+1];
@@ -88,6 +91,8 @@ void Sorter<T>::bubbleSort(){
 			}
 		}
 	}
+	t = clock() -t;
+	cout<<"bubleSort() took: "<<((float)t)/CLOCKS_PER_SEC<<" seconds"<<endl;
 	values->clear();
 	vector<int>::iterator it;
 	for(it = temp.begin(); it != temp.end(); it++){
@@ -103,6 +108,8 @@ void Sorter<T>::selectionSort(){
 	for(iter = values->begin(); iter != values->end(); iter++){
 		temp.push_back(*iter);
 	}
+	clock_t t;
+	t = clock();
 	int minIndex = 0;
 	int sortedIndex = 0;
 	int tempVal = 0;
@@ -118,6 +125,8 @@ void Sorter<T>::selectionSort(){
 		temp[sortedIndex] = tempVal;
 		sortedIndex++;
 	}
+	t = clock() -t;
+	cout<<"selectionSort() took: "<<((float)t)/CLOCKS_PER_SEC<<" seconds"<<endl;
 	values->clear();
 	vector<int>::iterator it;
 	for(it = temp.begin(); it != temp.end(); it++){
@@ -135,6 +144,8 @@ void Sorter<T>::insertionSort(){
 	for(iter = values->begin(); iter != values->end(); iter++){
 		temp.push_back(*iter);
 	}
+	clock_t t;
+	t = clock();
 	int sortedIndex;
 	int tempVal;
 	for(int i = 1; i < temp.size(); i++){
@@ -147,6 +158,8 @@ void Sorter<T>::insertionSort(){
 		}
 		temp[sortedIndex] = tempVal;
 	}
+	t = clock() -t;
+	cout<<"insertionSort() took: "<<((float)t)/CLOCKS_PER_SEC<<" seconds"<<endl;
 	values->clear();
 	vector<int>::iterator it;
 	for(it = temp.begin(); it != temp.end(); it++){
