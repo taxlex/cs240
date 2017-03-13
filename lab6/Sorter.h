@@ -93,6 +93,7 @@ void Sorter<T>::bubbleSort(){
 	}
 	t = clock() -t;
 	cout<<"bubleSort() took: "<<((float)t)/CLOCKS_PER_SEC<<" seconds"<<endl;
+	//convert back to original type
 	values->clear();
 	vector<int>::iterator it;
 	for(it = temp.begin(); it != temp.end(); it++){
@@ -127,6 +128,7 @@ void Sorter<T>::selectionSort(){
 	}
 	t = clock() -t;
 	cout<<"selectionSort() took: "<<((float)t)/CLOCKS_PER_SEC<<" seconds"<<endl;
+	//convert back to original type
 	values->clear();
 	vector<int>::iterator it;
 	for(it = temp.begin(); it != temp.end(); it++){
@@ -160,6 +162,7 @@ void Sorter<T>::insertionSort(){
 	}
 	t = clock() -t;
 	cout<<"insertionSort() took: "<<((float)t)/CLOCKS_PER_SEC<<" seconds"<<endl;
+	//convert back to original type
 	values->clear();
 	vector<int>::iterator it;
 	for(it = temp.begin(); it != temp.end(); it++){
