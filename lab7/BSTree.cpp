@@ -1,5 +1,6 @@
 #include <cstdlib>
 
+#include <iostream>
 #include "BSTree.h"
 
 
@@ -33,7 +34,7 @@ BSTree::Node::Node(Node * aParent){
 bool BSTree::Node::insert(Node * currNode, int val){
 	if(currNode->hasVal == false){
 		currNode->data = val; 
-		currNode->hasVal == true;
+		currNode->hasVal = true;
 		return true;
 	}
 	else if(currNode->data == val) return false;
@@ -57,10 +58,11 @@ bool BSTree::Node::find(Node * currNode, int val){
 		return false;
 	}
 	else if(currNode->data == val) return true;
-	else if(val < currNode->data){
+	else if(val < currNode->data && currNode->leftSubTree != NULL){
 		return find(currNode->leftSubTree, val);
 	}
-	else{
+	else if(val > currNode->data && currNode->rightSubTree != NULL){
 		return find(currNode->rightSubTree, val);
 	}
+	else return false;
 }

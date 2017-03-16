@@ -37,20 +37,17 @@ int main(){
 
 	cerr << "\n\t========================PASS========================\n" << endl;
 	cerr << "\n\tTEST #3: Cannot insert duplicate values into the Tree" << endl;
-/*
   	for(int i = 0; i < NUM_VALUES; i++){
   		assert(!tree.insert(array[i]));
   	}
 
 	cerr << "\n\t========================PASS========================\n" << endl;
 	cerr << "\n\tTEST #4: Insert 1000 Values into the Tree" << endl;
-
   	BSTree tree2;
   	for(int i = 0; i < 1000; i++){
   		int value = rand() % 10000;
   		tree2.insert(value);
   	}
-
 	cerr << "\n\t========================PASS========================\n" << endl;
 	cerr << "\n\tTEST #5: Find values in the tree" << endl;
 
@@ -68,6 +65,7 @@ int main(){
   	assert(!tree3.find(1));
 
 	cerr << "\n\t========================PASS========================\n" << endl;
+/*
 	cerr << "\n\tTEST #7: Cannot remove node that is not in the tree" << endl;
 
 	assert(!tree.remove(25));
