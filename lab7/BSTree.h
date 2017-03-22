@@ -12,8 +12,6 @@ class BSTree{
 		class Node{
 			public:
 				Node(Node * aParent);
-				bool insert(Node * currNode, int val);
-				bool find(Node * currNode, int val);
 				int data;
 				bool hasVal;
 	
@@ -21,6 +19,8 @@ class BSTree{
 				Node * leftSubTree;
 				Node * rightSubTree;
 				Node * parent;
+				bool insert(Node * currNode, int val);
+				bool find(Node * currNode, int val);
 	
 		};
 		Node * root;
