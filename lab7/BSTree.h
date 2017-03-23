@@ -31,6 +31,9 @@ class BSTree{
 				void copyPreOrder(Node * to, Node * from);
 				void deleteTreePostOrder(Node * currNode);
 				void sortedArrayInOrder(vector<int> &list, Node * currNode);
+				void removePreOrder(Node * currNode, int num);
+				Node * minVal();
+				Node * maxVal();
 	
 		};
 		Node * root;

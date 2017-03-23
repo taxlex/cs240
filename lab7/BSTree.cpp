@@ -1,6 +1,7 @@
 #include <cstdlib>
 
 #include <iostream>
+#include <vector>
 #include "BSTree.h"
 
 
@@ -27,6 +28,13 @@ bool BSTree::find(int val){
 void BSTree::sortedArray(vector<int> &list){
 	root->sortedArrayInOrder(list, root);
 }
+bool BSTree::remove(int num){
+	if(find(num) == false) return false;
+	root->removePreOrder(root, num);
+	return true;
+}
+
+
 
 
 
@@ -105,4 +113,45 @@ void BSTree::Node::sortedArrayInOrder(vector<int> &list, Node * currNode){
 	if(currNode->rightSubTree->hasVal){
 		sortedArrayInOrder(list,currNode->rightSubTree);
 	}
+}
+void BSTree::Node::removePreOrder(Node * currNode, int num){
+	if(num < currNode->data) removePreOrder(currNode->leftSubTree, num);
+	else if(num > currNode->data) removePreOrder(currNode->rightSubTree, num);
+	else{
+		if(currNode->leftSubTree->hasVal && currNode->rightSubTree->hasVal){
+			Node * temp = currNode->rightSubTree->minVal();
+			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = temp;
+			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = temp; 
+			temp->parent = currNode->parent;
+			temp->leftSubTree = currNode->leftSubTree;
+			if(temp->rightSubTree == NULL) temp->rightSubTree = currNode->rightSubTree;
+			else{
+				Node * maxTemp = temp->rightSubTree->maxVal();
+				maxTemp->rightSubTree = currNode->rightSubTree;
+			}
+		}
+		else if(currNode->leftSubTree->hasVal){
+			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->leftSubTree;
+			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->leftSubTree;
+			currNode->leftSubTree->parent = currNode->parent; 
+		}
+		else if(currNode->rightSubTree->hasVal){
+			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->rightSubTree;
+			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->rightSubTree;
+			currNode->rightSubTree->parent = currNode->parent; 
+		}
+		delete currNode;
+	}
+}
+BSTree::Node* BSTree::Node::minVal(){
+	if(this->leftSubTree->data < this->data){
+		return this->leftSubTree->minVal();
+	}
+	else return this;
+}
+BSTree::Node* BSTree::Node::maxVal(){
+	if(this->rightSubTree->data > this->data){
+		return this->rightSubTree->maxVal();
+	}
+	else return this;
 }
