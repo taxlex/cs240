@@ -7,6 +7,13 @@
 BSTree::BSTree(){
 	root = new Node(NULL);
 }
+BSTree::BSTree(const BSTree &old_tree){
+	root = new Node(NULL);
+	root->copyPostOrder(root, old_tree.root);
+}
+BSTree::~BSTree(){
+	delete root;
+}
 bool BSTree::empty(){
 	if(root->hasVal) return false;
 	return true;
@@ -65,4 +72,16 @@ bool BSTree::Node::find(Node * currNode, int val){
 		return find(currNode->rightSubTree, val);
 	}
 	else return false;
+}
+void BSTree::Node::copyPostOrder(Node * to, Node * from){
+	to->data = from->data;
+	to->hasVal = true;
+	if(from->leftSubTree->hasVal){
+		to->leftSubTree = new Node(to);
+		copyPostOrder(to->leftSubTree,from->leftSubTree);
+	}
+	if(from->rightSubTree->hasVal){
+		to->rightSubTree = new Node(to);
+		copyPostOrder(to->rightSubTree, from->rightSubTree);
+	}
 }
