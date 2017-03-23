@@ -28,7 +28,9 @@ class BSTree{
 				Node * parent;
 				bool insert(Node * currNode, int val);
 				bool find(Node * currNode, int val);
-				void copyPostOrder(Node * to, Node * from);
+				void copyPreOrder(Node * to, Node * from);
+				void deleteTreePostOrder(Node * currNode);
+				void sortedArrayInOrder(vector<int> &list, Node * currNode);
 	
 		};
 		Node * root;
