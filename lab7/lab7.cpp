@@ -65,7 +65,6 @@ int main(){
   	assert(!tree3.find(1));
 
 	cerr << "\n\t========================PASS========================\n" << endl;
-/*
 	cerr << "\n\tTEST #7: Cannot remove node that is not in the tree" << endl;
 
 	assert(!tree.remove(25));
@@ -166,6 +165,5 @@ int main(){
 
 	cerr << "\n\t========================PASS========================\n" << endl;
 	cerr << "\n\tAll Tests Passed.\nDon't forget to run with Valgrind and submit to Blackboard!\n" << endl;
-*/
 	return 0;
 }

@@ -8,7 +8,7 @@ DEBUG = -g
 all: $(OBJECTS)
 	g++ $(OBJECTS) $(DEBUG) -o $(PROJ)
 $(PROJ).o: $(PROJ).cpp
-	g++ -c $(PROJ).cpp $(DEBUG) -o $(PROJ).o
+	g++ -c $(PROJ).cpp $(DEBUG) -std=c++14 -o $(PROJ).o
 $(SOURCE1).o: $(SOURCE1).cpp
 	g++ -c $(SOURCE1).cpp $(DEBUG) -o $(SOURCE1).o
 #$(SOURCE2).o: $(SOURCE2).cpp
