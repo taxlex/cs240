@@ -26,7 +26,9 @@ bool BSTree::find(int val){
 	return root->find(root, val);
 }
 void BSTree::sortedArray(vector<int> &list){
-	root->sortedArrayInOrder(list, root);
+	if(root->hasVal){ 
+		root->sortedArrayInOrder(list, root);
+	}
 }
 bool BSTree::remove(int num){
 	if(find(num) == false) return false;
@@ -120,23 +122,6 @@ void BSTree::Node::removePreOrder(Node * currNode, int num){
 	else{
 		if(currNode->leftSubTree != NULL && currNode->rightSubTree != NULL){
 			/*
-			Node * temp = currNode->rightSubTree->minVal();
-			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = temp;
-			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = temp; 
-			if(currNode->rightSubTree != temp) temp->parent->leftSubTree = NULL;
-			temp->parent = currNode->parent;
-			temp->leftSubTree = currNode->leftSubTree;
-			temp->leftSubTree->parent = temp;
-			if(temp->rightSubTree == NULL && currNode->rightSubTree != temp){
-				temp->rightSubTree = currNode->rightSubTree;
-				temp->rightSubTree->parent = temp;
-			}
-			else if(currNode->rightSubTree != temp){
-				Node * maxTemp = temp->rightSubTree->maxVal();
-				maxTemp->rightSubTree = currNode->rightSubTree;
-				currNode->rightSubTree->parent = maxTemp;
-			}
-			*/
 			Node * temp = currNode->leftSubTree->maxVal();
 			currNode->data = temp->data;
 			if(temp->leftSubTree != NULL){
@@ -146,25 +131,62 @@ void BSTree::Node::removePreOrder(Node * currNode, int num){
 			else if(currNode->leftSubTree != temp){
 				temp->parent->rightSubTree = NULL;
 			}
-			delete temp;
+			else currNode->leftSubTree = NULL;
+			*/
+			currNode->data = currNode->rightSubTree->minVal()->data;
+			currNode->removePreOrder(currNode->rightSubTree, currNode->rightSubTree->minVal()->data);
+			//delete temp;
 
 		}
 		else if(currNode->leftSubTree != NULL){
+			/*
 			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->leftSubTree;
 			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->leftSubTree;
 			currNode->leftSubTree->parent = currNode->parent; 
 			delete currNode;
+			*/
+
+			Node * temp = currNode->leftSubTree;
+			currNode->data = temp->data;
+			currNode->leftSubTree = temp->leftSubTree;
+			currNode->rightSubTree = temp->rightSubTree;
+			if(temp->rightSubTree != NULL){
+				temp->rightSubTree->parent = currNode;
+			}
+			if(temp->leftSubTree != NULL){
+				temp->leftSubTree->parent = currNode;
+			}
+			delete temp;
 		}
 		else if(currNode->rightSubTree != NULL){
+			/*
 			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->rightSubTree;
 			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->rightSubTree;
 			currNode->rightSubTree->parent = currNode->parent; 
 			delete currNode;
+			*/
+			Node * temp = currNode->rightSubTree;
+			currNode->data = temp->data;
+			currNode->leftSubTree = temp->leftSubTree;
+			currNode->rightSubTree = temp->rightSubTree;
+			if(temp->rightSubTree != NULL){
+				temp->rightSubTree->parent = currNode;
+			}
+			if(temp->leftSubTree != NULL){
+				temp->leftSubTree->parent = currNode;
+			}
+			delete temp;
+
 		}
 		else{
-			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = NULL;
-			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = NULL;
-			delete currNode;
+			if(currNode->parent != NULL){
+				if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = NULL;
+				else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = NULL;
+				delete currNode;
+			}
+			else{
+				currNode->hasVal = false;
+			} 
 		}
 	}
 }

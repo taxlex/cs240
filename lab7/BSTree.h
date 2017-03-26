@@ -5,6 +5,7 @@
 
 using namespace std;
 class BSTree{
+	friend class Node;
 	public:
 		BSTree();
 		BSTree(const BSTree &old_tree);
