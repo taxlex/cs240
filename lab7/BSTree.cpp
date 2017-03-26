@@ -119,6 +119,7 @@ void BSTree::Node::removePreOrder(Node * currNode, int num){
 	else if(num > currNode->data) removePreOrder(currNode->rightSubTree, num);
 	else{
 		if(currNode->leftSubTree != NULL && currNode->rightSubTree != NULL){
+			/*
 			Node * temp = currNode->rightSubTree->minVal();
 			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = temp;
 			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = temp; 
@@ -135,33 +136,46 @@ void BSTree::Node::removePreOrder(Node * currNode, int num){
 				maxTemp->rightSubTree = currNode->rightSubTree;
 				currNode->rightSubTree->parent = maxTemp;
 			}
+			*/
+			Node * temp = currNode->leftSubTree->maxVal();
+			currNode->data = temp->data;
+			if(temp->leftSubTree != NULL){
+				temp->leftSubTree->parent = temp->parent;
+				temp->parent->rightSubTree = temp->leftSubTree;
+			}
+			else if(currNode->leftSubTree != temp){
+				temp->parent->rightSubTree = NULL;
+			}
+			delete temp;
+
 		}
 		else if(currNode->leftSubTree != NULL){
 			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->leftSubTree;
 			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->leftSubTree;
 			currNode->leftSubTree->parent = currNode->parent; 
+			delete currNode;
 		}
 		else if(currNode->rightSubTree != NULL){
 			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->rightSubTree;
 			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->rightSubTree;
 			currNode->rightSubTree->parent = currNode->parent; 
+			delete currNode;
 		}
 		else{
 			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = NULL;
 			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = NULL;
+			delete currNode;
 		}
-		delete currNode;
 	}
 }
 BSTree::Node* BSTree::Node::minVal(){
-	if(this->leftSubTree->data < this->data){
+	if(this->leftSubTree != NULL){
 		return this->leftSubTree->minVal();
 	}
 	else return this;
 }
-BSTree::Node* BSTree::Node::maxVal(){
-	cout<<"cp1"<<endl;
-	if(this->rightSubTree->data > this->data){
+BSTree::Node* BSTree::Node::maxVal(){	
+	if(this->rightSubTree != NULL){
 		return this->rightSubTree->maxVal();
 	}
 	else return this;
