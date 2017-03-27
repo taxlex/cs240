@@ -35,6 +35,9 @@ bool BSTree::remove(int num){
 	root->removePreOrder(root, num);
 	return true;
 }
+void BSTree::printBST(){
+	root->printNode(root,0);
+}
 
 
 
@@ -121,31 +124,11 @@ void BSTree::Node::removePreOrder(Node * currNode, int num){
 	else if(num > currNode->data) removePreOrder(currNode->rightSubTree, num);
 	else{
 		if(currNode->leftSubTree != NULL && currNode->rightSubTree != NULL){
-			/*
-			Node * temp = currNode->leftSubTree->maxVal();
-			currNode->data = temp->data;
-			if(temp->leftSubTree != NULL){
-				temp->leftSubTree->parent = temp->parent;
-				temp->parent->rightSubTree = temp->leftSubTree;
-			}
-			else if(currNode->leftSubTree != temp){
-				temp->parent->rightSubTree = NULL;
-			}
-			else currNode->leftSubTree = NULL;
-			*/
 			currNode->data = currNode->rightSubTree->minVal()->data;
 			currNode->removePreOrder(currNode->rightSubTree, currNode->rightSubTree->minVal()->data);
-			//delete temp;
 
 		}
 		else if(currNode->leftSubTree != NULL){
-			/*
-			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->leftSubTree;
-			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->leftSubTree;
-			currNode->leftSubTree->parent = currNode->parent; 
-			delete currNode;
-			*/
-
 			Node * temp = currNode->leftSubTree;
 			currNode->data = temp->data;
 			currNode->leftSubTree = temp->leftSubTree;
@@ -159,12 +142,6 @@ void BSTree::Node::removePreOrder(Node * currNode, int num){
 			delete temp;
 		}
 		else if(currNode->rightSubTree != NULL){
-			/*
-			if(currNode->parent->leftSubTree == currNode)currNode->parent->leftSubTree = currNode->rightSubTree;
-			else if(currNode->parent->rightSubTree == currNode)currNode->parent->rightSubTree = currNode->rightSubTree;
-			currNode->rightSubTree->parent = currNode->parent; 
-			delete currNode;
-			*/
 			Node * temp = currNode->rightSubTree;
 			currNode->data = temp->data;
 			currNode->leftSubTree = temp->leftSubTree;
@@ -201,4 +178,33 @@ BSTree::Node* BSTree::Node::maxVal(){
 		return this->rightSubTree->maxVal();
 	}
 	else return this;
+}
+void  BSTree::Node::printNode(Node * currNode, int level){
+	if(currNode->rightSubTree != NULL){
+		printNode(currNode->rightSubTree, level+1);
+	}
+	string str;
+	if(currNode->rightSubTree != NULL){
+		for(int i =0; i < level; i++){
+			cout<<"    ";
+		}
+		cout<<"   /"<<endl;
+	}
+	for(int i =0; i <level; i++){
+		if(i+1 == level){
+			str += "   +";
+		}
+		else str += "    ";
+	}
+	cout<<str;
+	cout<<currNode->data<<endl;
+	if(currNode->leftSubTree != NULL){
+		for(int i =0; i < level; i++){
+			cout<<"    ";
+		}
+		cout<<"   \\"<<endl;
+	}
+	if(currNode->leftSubTree != NULL){
+		printNode(currNode->leftSubTree, level+1);
+	}
 }

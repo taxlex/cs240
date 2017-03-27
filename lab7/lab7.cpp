@@ -7,6 +7,7 @@
 #include <list>
 #include "BSTree.h"
 #include "BSTree.h"
+#include <string>
 using namespace std;
 
 #define NUM_VALUES 12
@@ -165,5 +166,14 @@ int main(){
 
 	cerr << "\n\t========================PASS========================\n" << endl;
 	cerr << "\n\tAll Tests Passed.\nDon't forget to run with Valgrind and submit to Blackboard!\n" << endl;
+	cerr << "\n\t========================EXTRA========================\n" << endl;
+	BSTree * toPrint = new BSTree();
+	for(int i = 0; i < 20; i++){
+		int value = rand() % 100;
+		toPrint->insert(value);
+	}
+	toPrint->printBST();
+	cerr<<"I was going to us '|' in my print to make it easier to read but the instructions specified white space"<<endl;
+	delete toPrint;
 	return 0;
 }

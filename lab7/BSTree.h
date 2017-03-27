@@ -15,6 +15,7 @@ class BSTree{
 		bool find(int val);
 		void sortedArray(vector<int> &list);
 		bool remove(int num);
+		void printBST();
 	private:
 		class Node{
 			friend class BSTree;
@@ -35,6 +36,7 @@ class BSTree{
 				void removePreOrder(Node * currNode, int num);
 				Node * minVal();
 				Node * maxVal();
+				void printNode(Node * currNode, int level);
 	
 		};
 		Node * root;
