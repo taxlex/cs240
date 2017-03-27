@@ -89,20 +89,20 @@ bool BSTree::Node::find(Node * currNode, int val){
 void BSTree::Node::copyPreOrder(Node * to, Node * from){
 	to->data = from->data;
 	to->hasVal = true;
-	if(from->leftSubTree->hasVal){
+	if(from->leftSubTree != NULL){
 		to->leftSubTree = new Node(to);
 		copyPreOrder(to->leftSubTree,from->leftSubTree);
 	}
-	if(from->rightSubTree->hasVal){
+	if(from->rightSubTree != NULL){
 		to->rightSubTree = new Node(to);
 		copyPreOrder(to->rightSubTree, from->rightSubTree);
 	}
 }
 void BSTree::Node::deleteTreePostOrder(Node * currNode){
-	if(currNode->leftSubTree->hasVal){
+	if(currNode->leftSubTree != NULL){
 		deleteTreePostOrder(currNode->leftSubTree);
 	}
-	if(currNode->rightSubTree->hasVal){
+	if(currNode->rightSubTree != NULL){
 		deleteTreePostOrder(currNode->rightSubTree);
 	}
 	delete currNode;
