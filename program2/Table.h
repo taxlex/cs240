@@ -1,6 +1,7 @@
 #ifndef TABLE_H
 #define TABLE_H
 
+#include "Card.h"
 #include <vector>
 
 using namespace std;
