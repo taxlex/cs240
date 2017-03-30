@@ -15,6 +15,7 @@ class Heap{
 		bool empty();
 		unsigned int size();
 	private:
+		vector<Player> arr;
 };
 
 
