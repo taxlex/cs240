@@ -1,5 +1,5 @@
-#ifndef BSTREE_H
-#define BSTREE_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <vector>
 
