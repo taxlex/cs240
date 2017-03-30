@@ -6,7 +6,7 @@
 using namespace std;
 class Player{
 	public:
-		Player(String name, int budget);
+		Player(String aName, int aBudget);
 		Card hand;
 		string getName();
 		int getBudget();
@@ -14,6 +14,7 @@ class Player{
 		void collectWinnings(int amount);
 	private:
 		int budget;
+		string name;
 };
 
 
