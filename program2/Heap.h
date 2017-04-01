@@ -14,6 +14,8 @@ class Heap{
 		vector<Player> getArray();
 		bool empty();
 		unsigned int size();
+		bool swap(int parentIndex, int childIndex);
+		void siftUp(int parentIndex, int childIndex);
 	private:
 		vector<Player> arr;
 };
