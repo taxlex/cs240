@@ -1,5 +1,5 @@
 #include "Table.h"
-#include <vecotr>
+#include <vector>
 
 
 

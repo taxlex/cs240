@@ -2,12 +2,15 @@
 #define PLAYER_H
 
 #include <vector>
+#include <string>
+
+#include "Card.h"
 
 using namespace std;
 class Player{
 	public:
-		Player(String aName, int aBudget);
-		Card hand;
+		Player(string aName, int aBudget);
+		//Card hand;
 		string getName();
 		int getBudget();
 		bool bet(int amount);

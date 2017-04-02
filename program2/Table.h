@@ -2,6 +2,7 @@
 #define TABLE_H
 
 #include "Card.h"
+#include "Player.h"
 #include <vector>
 
 using namespace std;

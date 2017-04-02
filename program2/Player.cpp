@@ -1,10 +1,10 @@
 #include "Player.h"
-
+#include "Card.h"
 using namespace std;
 
-Player::Player(String aName, int aBudget){
+Player::Player(string aName, int aBudget){
 	name = aName;
-	budget = aBudeget;
+	budget = aBudget;
 }
 string Player::getName(){
 	return name;
