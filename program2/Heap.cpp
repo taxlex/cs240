@@ -8,7 +8,7 @@ Heap::Heap(){
 }
 void Heap::addPlayer(Player newPlayer){
 	arr.push_back(newPlayer);
-	siftUp((arr.size()-1);
+	siftUp(arr.size()-1);
 }
 void Heap::siftUp(int index){
 	if(arr[index].getBudget() > arr[(index-1)/2].getBudget()){
@@ -19,9 +19,9 @@ void Heap::siftUp(int index){
 	}
 }
 bool Heap::siftDownDel(int index){
-	if(arr.[index] == NULL) return false;
-	if(arr[index*2 +1] != NULL && arr[index*2 +2] != NULL){
-		if(arr[index*2 + 1] > arr[index*2 +2]){
+	if(index >= arr.size()) return false;
+	if(index*2 +2 < arr.size()){
+		if(arr[index*2 + 1].getBudget() > arr[index*2 +2].getBudget()){
 			swap(index, index*2 +1);
 			return siftDownDel(index*2 +1);
 		}
@@ -30,16 +30,12 @@ bool Heap::siftDownDel(int index){
 			return siftDownDel(index*2 + 2);
 		}
 	}
-	else if(arr[index*2 + 1] != NULL){
+	else if(index*2 + 1 < arr.size()){
 		swap(index, index*2 + 1);
 		return siftDownDel(index*2 + 1);
 	}
-	else if(arr[index*2 + 2] != NULL){
-		swap(index, index*2 + 2);
-		return siftDownDel(index*2 + 2);
-	}
 	else{
-		arr.erase(index);
+		arr.pop_back();
 		return true;
 	}
 }
