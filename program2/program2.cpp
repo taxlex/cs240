@@ -49,13 +49,14 @@ int main(){
 	cerr << "\n\tTEST #0: Missing file handled" << endl;
 	Heap test1("empty.txt");
 	cerr << "\n\t========================PASS========================\n" << endl;
-/*
+
 	cerr << "\n\tTEST #1: Create Players and store them in a heap" << endl;
 	Heap tourney("players.txt");
 	assert(isHeap(tourney.getArray(), 0));
+	cerr<<tourney.size()<<endl;
 	assert(tourney.size() == 17);
 	cerr << "\n\t========================PASS========================\n" << endl;
-
+/*
 	cerr << "\n\tTEST #2: Players stored in correct order when removed from the heap" << endl;
 
 	Player 	p = tourney.getPlayer();

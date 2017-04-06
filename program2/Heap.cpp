@@ -1,10 +1,24 @@
 #include <vector>
+#include <fstream>
+#include <iostream>
+#include <string>
 #include "Heap.h"
+
 
 using namespace std;
 
 Heap::Heap(){
 	arr.clear();
+}
+Heap::Heap(string filename){
+	string name;
+	int budget;
+	ifstream input(filename.c_str());
+	while(getline(input,name)){
+		input>>budget;
+		Player temp = Player(name,budget);
+		addPlayer(temp);
+	}
 }
 void Heap::addPlayer(Player newPlayer){
 	arr.push_back(newPlayer);
@@ -18,30 +32,31 @@ void Heap::siftUp(int index){
 		}
 	}
 }
-bool Heap::siftDownDel(int index){
+bool Heap::siftDown(int index){
 	if(index >= arr.size()) return false;
 	if(index*2 +2 < arr.size()){
 		if(arr[index*2 + 1].getBudget() > arr[index*2 +2].getBudget()){
 			swap(index, index*2 +1);
-			return siftDownDel(index*2 +1);
+			return siftDown(index*2 +1);
 		}
 		else{
 			swap(index, index*2 + 2);
-			return siftDownDel(index*2 + 2);
+			return siftDown(index*2 + 2);
 		}
 	}
 	else if(index*2 + 1 < arr.size()){
 		swap(index, index*2 + 1);
-		return siftDownDel(index*2 + 1);
+		return siftDown(index*2 + 1);
 	}
 	else{
-		arr.pop_back();
 		return true;
 	}
 }
 Player Heap::getPlayer(){
 	Player temp = arr[0];
-	siftDownDel(0);
+	swap(0, arr.size() -1);
+	arr.pop_back();
+	siftDown(0);
 	return temp;
 }
 vector<Player> Heap::getArray(){
