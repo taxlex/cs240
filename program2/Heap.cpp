@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include "Heap.h"
 
 
@@ -12,12 +13,17 @@ Heap::Heap(){
 }
 Heap::Heap(string filename){
 	string name;
+	string aBudget;
 	int budget;
 	ifstream input(filename.c_str());
-	while(getline(input,name)){
-		input>>budget;
-		Player temp = Player(name,budget);
-		addPlayer(temp);
+	if(input){
+		while(!input.eof()){
+			getline(input,name);
+			getline(input,aBudget);
+			budget = strtol(aBudget.c_str(), NULL, 10);
+			Player temp = Player(name,budget);
+			addPlayer(temp);
+		}
 	}
 }
 void Heap::addPlayer(Player newPlayer){
@@ -35,16 +41,16 @@ void Heap::siftUp(int index){
 bool Heap::siftDown(int index){
 	if(index >= arr.size()) return false;
 	if(index*2 +2 < arr.size()){
-		if(arr[index*2 + 1].getBudget() > arr[index*2 +2].getBudget()){
+		if(arr[index*2 + 1].getBudget() > arr[index*2 +2].getBudget() && arr[index*2 + 1].getBudget() > arr[index].getBudget()){
 			swap(index, index*2 +1);
 			return siftDown(index*2 +1);
 		}
-		else{
+		else if(arr[index*2 + 2].getBudget() > arr[index].getBudget()){
 			swap(index, index*2 + 2);
 			return siftDown(index*2 + 2);
 		}
 	}
-	else if(index*2 + 1 < arr.size()){
+	else if(index*2 + 1 < arr.size() && arr[index*2 + 1].getBudget() > arr[index].getBudget()){
 		swap(index, index*2 + 1);
 		return siftDown(index*2 + 1);
 	}
