@@ -26,6 +26,9 @@ Heap::Heap(string filename){
 		}
 	}
 }
+Heap::Heap(const Heap &copy){
+	arr = copy.arr;
+}
 void Heap::addPlayer(Player newPlayer){
 	arr.push_back(newPlayer);
 	siftUp(arr.size()-1);

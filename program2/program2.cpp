@@ -99,7 +99,7 @@ int main(){
 	assert(tourney.empty());
 	cerr << "\n\t========================PASS========================\n" << endl;
 
-/*
+
 	cerr << "\n\tTEST #4: Can add individual players to the heap" << endl;
 	Heap heap_test("players.txt");
 	while(!heap_test.empty()){
@@ -108,7 +108,7 @@ int main(){
 		assert(isHeap(tourney.getArray(), 0));
 	}
 	cerr << "\n\t========================PASS========================\n" << endl;
-
+/*
 	cerr << "\n\tTEST #5: Play 1 round of highcard" << endl;
 	int ante = 5;
 	Table highcardTable(5, ante);
