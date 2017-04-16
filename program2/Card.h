@@ -4,6 +4,7 @@
 using namespace std;
 class Card{
 	public:
+		Card();
 		Card(int suit, int value);
 		int getValue(){return value;};
 		int getSuit(){return suit;};

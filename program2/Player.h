@@ -10,7 +10,7 @@ using namespace std;
 class Player{
 	public:
 		Player(string aName, int aBudget);
-		//Card hand;
+		Card hand;
 		string getName();
 		int getBudget();
 		bool bet(int amount);

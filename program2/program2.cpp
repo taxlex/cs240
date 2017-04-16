@@ -108,7 +108,7 @@ int main(){
 		assert(isHeap(tourney.getArray(), 0));
 	}
 	cerr << "\n\t========================PASS========================\n" << endl;
-/*
+
 	cerr << "\n\tTEST #5: Play 1 round of highcard" << endl;
 	int ante = 5;
 	Table highcardTable(5, ante);
@@ -123,7 +123,7 @@ int main(){
 	assert(verifyHeap(tourney));
 	assert(isHeap(tourney.getArray(), 0));
 	cerr << "\n\t========================PASS========================\n" << endl;
-
+/*
 	cerr << "\n\tTEST #6: Play highcard tournament" << endl;
 	while(!tourney.empty()){
 		while(!tourney.empty() && highcardTable.emptySeat()){

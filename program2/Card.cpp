@@ -1,7 +1,10 @@
 #include "Card.h"
 #include <iostream>
 using namespace std;
-
+Card::Card(){
+	suit = 2;
+	value = 2;
+}
 Card::Card(int suit, int value){
 	if(suit > 0 && suit < 5) this->suit = suit;
 	else cout<<"not in suit range"<<endl;

@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "Card.h"
 using namespace std;
-
 Player::Player(string aName, int aBudget){
 	name = aName;
 	budget = aBudget;
