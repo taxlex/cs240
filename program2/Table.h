@@ -2,6 +2,7 @@
 #define TABLE_H
 
 #include "Card.h"
+#include "Deck.h"
 #include "Player.h"
 #include <vector>
 
@@ -14,6 +15,10 @@ class Table{
 		void addPlayer(Player p);
 		void printWinner();
 	private:
+		Deck * theDeck;
+		int num_players;
+		int min_ante;
+		vector<Player> playing;
 };
 
 

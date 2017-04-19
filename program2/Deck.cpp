@@ -11,12 +11,18 @@ Deck::Deck(){
 		}
 	}
 }
+Deck::~Deck(){
+	while(!empty()){
+		Card * del = stack.dequeue();
+		delete del;
+	}
+}
 Card Deck::draw(){
 	Card * copy = stack.dequeue();
 	Card ret = *copy;
 	delete copy;
 	return ret;
-}	
+}
 bool Deck::empty(){
 	return stack.empty();
 }

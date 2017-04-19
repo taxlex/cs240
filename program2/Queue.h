@@ -57,7 +57,7 @@ template <class T>
 void Queue<T>::clear(){
 	while(tot !=0){
 		T temp = dequeue();
-		delete &temp;
+		delete temp;
 		tot--;
 	}
 }

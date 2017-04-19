@@ -7,6 +7,7 @@ using namespace std;
 class Deck{
 	public:
 		Deck();
+		~Deck();
 		Card draw();
 		bool empty();
 		void shuffle();
