@@ -22,7 +22,7 @@ vector<Player> Table::playRound(){
 	}
 	Player winner = playing[0];
 	int winnerIndex = 0;
-	for(int i = 1; i < num_players; i++){
+	for(int i = 1; i < playing.size(); i++){
 		if(playing[i].hand.getValue() > winner.hand.getValue()){
 			winner = playing[i];
 			winnerIndex = i;
