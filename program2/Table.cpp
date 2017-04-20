@@ -28,10 +28,10 @@ vector<Player> Table::playRound(){
 			winnerIndex = i;
 		}
 		else if(playing[i].hand.getValue() == winner.hand.getValue()){
-			/*if(playing[i].hand.getSuit() > winner.hand.getSuit()){
+			if(playing[i].hand.getSuit() > winner.hand.getSuit()){
 				winner = playing[i];
 				winnerIndex = i;
-			}*/
+			}
 		}
 	}
 	playing.erase(playing.begin() + winnerIndex);

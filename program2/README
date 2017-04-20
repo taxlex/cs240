@@ -3,7 +3,7 @@ Spring semester, 2017
 Project2 README FILE
 
 Due Date: April 20, 2017
-Submission Date: April 19, 2017
+Submission Date: April 20, 2017
 Author(s): Alexander Benedict
 
 PERCENT COMPLETE:
@@ -13,7 +13,7 @@ PARTS THAT ARE NOT COMPLETE:
 None
 
 BUGS:
-Does not take suit into account when deciding winner.
+None known
 
 FILES:
 Card.cpp, Card.h, Deck.cpp, Deck.h, Heap.cpp, Heap.h, LinkedList.h, makefile, Player.cpp, Player.h, players2.txt, players.txt, program2.cpp, Queue.h, Table.cpp, and Table.h
