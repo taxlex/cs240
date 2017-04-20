@@ -5,7 +5,8 @@
 
 using namespace std;
 Table::Table(int num_seats, int ante){
-	num_players = num_seats;
+	if(num_seats > 52) num_players = 52;
+	else num_players = num_seats;
 	min_ante = ante;
 }
 bool Table::emptySeat(){
@@ -26,11 +27,17 @@ vector<Player> Table::playRound(){
 			winner = playing[i];
 			winnerIndex = i;
 		}
+		else if(playing[i].hand.getValue() == winner.hand.getValue()){
+			/*if(playing[i].hand.getSuit() > winner.hand.getSuit()){
+				winner = playing[i];
+				winnerIndex = i;
+			}*/
+		}
 	}
 	playing.erase(playing.begin() + winnerIndex);
+	winner.collectWinnings(playing.size()*min_ante);
 	vector<Player> ret = playing;
 	playing.clear();
-	winner.collectWinnings(num_players*min_ante);
 	playing.push_back(winner);
 	delete theDeck;
 	return ret;

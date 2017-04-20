@@ -195,8 +195,28 @@ int main(){
 	highcardTable3.printWinner();
 	cerr << "\n\t========================PASS========================\n" << endl;
 
-	//####################Your Tests#####################//
-	//cerr << "\n\tTEST #9: Two tests of your own" << endl;
+	cerr << "\n\tTEST #9: Trying to add player who can't pay ante" << endl;
+	Player cheap = Player("Mr. Crabs", 1);
+	//Mr. Crabs budget is 1 but the ante for the table is 2, he should not be allowed to join the table
+	Table emptyTable = Table(1,2);
+	emptyTable.addPlayer(cheap);
+	assert(emptyTable.emptySeat());
+	cerr << "\n\t========================PASS========================\n" << endl;
+
+	cerr << "\n\tTEST #10: Table with more seats than cards in deck" << endl;
+	//There are only 52 cards in the deck so at most there should be 52 players, this table has 78 seats
+	Table bigTable = Table(78,2);
+	Player mult = Player("Cody", 45);
+	//try to add 76 players to the 78 seat table
+	for(int i = 0; i < 76; i++){
+		bigTable.addPlayer(mult);
+	}
+	//asserts that the table is full
+	assert(!bigTable.emptySeat());
+	//since there should be at most 52 players and only one winner there should be 51 losers
+	assert(bigTable.playRound().size() == 51);
+	cerr << "\n\t========================PASS========================\n" << endl;
+
 
 	return 0;
 }
