@@ -10,18 +10,26 @@ KeyVal::KeyVal(string aKey, string aValue){
 	key = aKey;
 	value = aValue;
 }
-
 Hash::Hash(unsigned int size){
 	arr = new KeyVal*[size];
 	arrSize = size;
+	for(int i = 0; i < size; i++){
+		arr[i] = new KeyVal("","");
+	}
+}
+Hash::~Hash(){
+	for(int i = 0; i < size(); i++){
+		delete arr[i];
+	}
+	delete[] arr;
 }
 bool Hash::insert(string key, string value){
-	KeyVal * temp = new KeyVal(key, value);
 	int index = Hasher(key);
 	bool ins = false;
 	for(int i = index; i < size(); i++){
 		if(arr[i]->getKey().empty()){
-			arr[i] = temp;
+			arr[i]->key = key;
+			arr[i]->value = value;
 			ins = true;
 			break;
 		}
@@ -29,7 +37,8 @@ bool Hash::insert(string key, string value){
 	if(!ins){
 		for(int i = 0; i < index; i++){
 			if(arr[i]->getKey().empty()){
-				arr[i] = temp;
+				arr[i]->key = key;
+				arr[i]->value = value;
 				ins = true;
 				break;
 			}

@@ -16,6 +16,7 @@ class KeyVal{
 class Hash{
 	public:
 		Hash(unsigned int size);
+		~Hash();
 		bool insert(string key, string value);
 		bool remove(string key);
 		string find(string key);
