@@ -3,7 +3,16 @@
 #include <string>
 
 using namespace std;
+class KeyVal{
+	public:
+		KeyVal();
+		KeyVal(string aKey, string aValue);
+		string getKey(){return key;};
+		string getValue(){return value;};
+		string key;
+		string value;
 
+};
 class Hash{
 	public:
 		Hash(unsigned int size);
@@ -11,13 +20,13 @@ class Hash{
 		bool remove(string key);
 		string find(string key);
 		bool empty();
-		bool size();
+		int size();
 		void printHash();
-		int hasher(string key);
+		int Hasher(string key);
 	private:
-		
-}
-
+		KeyVal ** arr;
+		int arrSize;
+};
 
 
 
