@@ -1,0 +1,23 @@
+#ifndef CITY_H
+#define CITY_H
+#include <string>
+#include <list>
+using namespace std;
+
+class City{
+	public:
+		City(string cityName, int xCoor, int yCoor);
+		string getName(){return name;};
+		int getXCoor(){return x;};
+		int getYCoor(){return y;};
+		list<City*> getAdjacent();
+		bool operator<(City &c);
+	private:
+		string name;
+		int x;
+		int y;
+		list<City*> cities;
+};
+
+
+#endif
