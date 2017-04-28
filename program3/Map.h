@@ -7,7 +7,7 @@ class Map{
 	public:
 		Map(string filename);
 		City* findByName(string cityName);
-}
+};
 
 
 #endif
