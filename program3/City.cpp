@@ -11,12 +11,12 @@ City::City(string cityName, int xCoor, int yCoor){
 	y = yCoor;
 }
 list<City*> City::getAdjacent(){
-	return this.adjacencies;
+	return this->adjacencies;
 }
 void City::setAdjacent(list<City*> anAdjacent){
 	adjacencies = anAdjacent;
 }
 bool City::operator<(City &c){
-	if(this.length() < &c.length()) return true;
+	if(this->getName().length() < c.getName().length()) return true;
 	return false;
 }

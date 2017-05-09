@@ -1,4 +1,5 @@
 #include "Map.h"
+#include <stdlib.h>
 #include <fstream>
 #include <string>
 using namespace std;
@@ -17,7 +18,7 @@ Map::Map(string filename){
 			getline(input,aY);
 			x = strtol(aX.c_str(), NULL, 10);
 			y = strtol(aY.c_str(), NULL, 10);
-			City temp = new City(name,x,y);
+			City * temp = new City(name,x,y);
 			addCity(temp);
 			setAdjacencies(temp);
 		}
@@ -26,8 +27,8 @@ Map::Map(string filename){
 City* Map::findByName(string cityName){
 	list<City*>::iterator it;
 	for (it = cities.begin(); it != cities.end(); ++it){
-		if(it->getName().compare(cityName)){
-			return it;
+		if((*it)->getName().compare(cityName)){
+			return (*it);
 		}
 	}
 }
@@ -36,46 +37,49 @@ void Map::setAdjacencies(City * currCity){
 	City * closestRight;
 	City * closestAbove;
 	City * closestBelow;
+	int x = currCity->getXCoor();
+	int y = currCity->getYCoor();
+
 	list<City*> ret;
 	list<City*>::iterator it;
 	for (it = cities.begin(); it != cities.end(); ++it){
-		if(it->getx() == x && it->getY() == y);
-		else if(it->getx() == x){
-			if(it->getY() > y){
+		if((*it)->getXCoor() == x && (*it)->getYCoor() == y);
+		else if((*it)->getXCoor() == x){
+			if((*it)->getYCoor() > y){
 				if(closestAbove == NULL){
-					closestAbove = it;
+					closestAbove = (*it);
 				}
-				else if(abs(closestAbove->getY()-y) > abs(it->getY() - y)){
-					closestAbove = it;
+				else if(abs(closestAbove->getYCoor()-y) > abs((*it)->getYCoor() - y)){
+					closestAbove = (*it);
 				}
 			}
 			else{
-				if(it->getY() > y){
+				if((*it)->getYCoor() > y){
 					if(closestBelow == NULL){
-						closestBelow = it;
+						closestBelow = (*it);
 					}
-					else if(abs(closestBelow->getY()-y) > abs(it->getY() - y)){
-						closestBelow = it;
+					else if(abs(closestBelow->getYCoor()-y) > abs((*it)->getYCoor() - y)){
+						closestBelow = (*it);
 					}
 				}
 			}
 		}
-		else if(it->getY() == y){
-			if(it->getX() > x){
+		else if((*it)->getYCoor() == y){
+			if((*it)->getXCoor() > x){
 				if(closestRight == NULL){
-					closestRight = it;
+					closestRight = (*it);
 				}
-				else if(abs(closestRight->getX()-x) > abs(it->getX() - x)){
-					closestRight it;
+				else if(abs(closestRight->getXCoor()-x) > abs((*it)->getXCoor() - x)){
+					closestRight = (*it);
 				}
 			}
 			else{
-				if(it->getX() > x){
+				if((*it)->getXCoor() > x){
 					if(closestLeft == NULL){
-						closestLeft = it;
+						closestLeft = (*it);
 					}
-					else if(abs(closestLeft->getX()-x) > abs(it->getX() - x)){
-						closestLeft = it;
+					else if(abs(closestLeft->getXCoor()-x) > abs((*it)->getXCoor() - x)){
+						closestLeft = (*it);
 					}
 				}
 			}
