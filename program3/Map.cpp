@@ -12,12 +12,8 @@ Map::Map(string filename){
 	int y;
 	ifstream input(filename.c_str());
 	if(input){
-		while(!input.eof()){
-			getline(input,name);
-			getline(input,aX);
-			getline(input,aY);
-			x = strtol(aX.c_str(), NULL, 10);
-			y = strtol(aY.c_str(), NULL, 10);
+		while(input >> name >> x >> y){
+
 			City * temp = new City(name,x,y);
 			addCity(temp);
 			setAdjacencies(temp);
@@ -27,10 +23,11 @@ Map::Map(string filename){
 City* Map::findByName(string cityName){
 	list<City*>::iterator it;
 	for (it = cities.begin(); it != cities.end(); ++it){
-		if((*it)->getName().compare(cityName)){
+		if(!(*it)->getName().compare(cityName)){
 			return (*it);
 		}
 	}
+	return NULL;
 }
 void Map::setAdjacencies(City * currCity){
 	City * closestLeft;
@@ -90,4 +87,11 @@ void Map::setAdjacencies(City * currCity){
 	if(closestBelow != NULL) ret.push_back(closestBelow);
 	if(closestAbove != NULL) ret.push_back(closestAbove);
 	currCity->setAdjacent(ret);
+}
+vector<City *> Map::shortestPath(City * start, City * dest){
+	vector<City *> ret;
+	return ret;
+}
+unsigned int Map::pathDistance(City * start, City * dest){
+	return 1;
 }

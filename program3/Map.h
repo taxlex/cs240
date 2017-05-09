@@ -1,6 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 #include "City.h"
+#include <iostream>
 #include <list>
 #include <string>
 #include <vector>

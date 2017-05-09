@@ -86,7 +86,7 @@ int main(int argc, char *argv[]){
 
 	cerr << "\n\t========================PASS========================\n" << endl;
 
-
+/*
 	cerr << "\n\tTEST #2: Test Adjacencies" << endl;
 
 	string city = "mogadishu";
@@ -185,7 +185,7 @@ int main(int argc, char *argv[]){
 	cerr << "\n\t========================PASS========================\n" << endl;
 
 
-
+*/
 	return 0;
 
 }
