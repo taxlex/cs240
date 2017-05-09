@@ -11,12 +11,13 @@ class City{
 		int getXCoor(){return x;};
 		int getYCoor(){return y;};
 		list<City*> getAdjacent();
+		void setAdjacent(list<City*> anAdjacent);
 		bool operator<(City &c);
 	private:
 		string name;
 		int x;
 		int y;
-		list<City*> cities;
+		list<City*> adjacencies;
 };
 
 

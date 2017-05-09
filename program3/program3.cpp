@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cassert>
 #include <list>
+#include <vector>
 #include "Map.h"
 #include "Map.h"
 #include "City.h"
