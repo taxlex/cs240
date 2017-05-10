@@ -30,10 +30,10 @@ City* Map::findByName(string cityName){
 	return NULL;
 }
 void Map::setAdjacencies(City * currCity){
-	City * closestLeft;
-	City * closestRight;
-	City * closestAbove;
-	City * closestBelow;
+	City * closestLeft = NULL;
+	City * closestRight = NULL;
+	City * closestAbove = NULL;
+	City * closestBelow = NULL;
 	int x = currCity->getXCoor();
 	int y = currCity->getYCoor();
 
@@ -51,13 +51,11 @@ void Map::setAdjacencies(City * currCity){
 				}
 			}
 			else{
-				if((*it)->getYCoor() > y){
-					if(closestBelow == NULL){
-						closestBelow = (*it);
-					}
-					else if(abs(closestBelow->getYCoor()-y) > abs((*it)->getYCoor() - y)){
-						closestBelow = (*it);
-					}
+				if(closestBelow == NULL){
+					closestBelow = (*it);
+				}
+				else if(abs(closestBelow->getYCoor()-y) > abs((*it)->getYCoor() - y)){
+					closestBelow = (*it);
 				}
 			}
 		}
@@ -71,13 +69,11 @@ void Map::setAdjacencies(City * currCity){
 				}
 			}
 			else{
-				if((*it)->getXCoor() > x){
-					if(closestLeft == NULL){
-						closestLeft = (*it);
-					}
-					else if(abs(closestLeft->getXCoor()-x) > abs((*it)->getXCoor() - x)){
-						closestLeft = (*it);
-					}
+				if(closestLeft == NULL){
+					closestLeft = (*it);
+				}
+				else if(abs(closestLeft->getXCoor()-x) > abs((*it)->getXCoor() - x)){
+					closestLeft = (*it);
 				}
 			}
 		}
@@ -86,7 +82,21 @@ void Map::setAdjacencies(City * currCity){
 	if(closestRight != NULL) ret.push_back(closestRight);
 	if(closestBelow != NULL) ret.push_back(closestBelow);
 	if(closestAbove != NULL) ret.push_back(closestAbove);
+	/*cout<<"!!!"<<currCity->getName()<<endl;
+	for(it = ret.begin(); it != ret.end(); it++){
+		cout<<(*it)->getName()<<endl;
+	}*/
 	currCity->setAdjacent(ret);
+	//Sets the adjacencies of adjacencies
+	for(it = ret.begin(); it != ret.end(); it++){
+		list<City*>::iterator its;
+		list<City*> adj = (*it)->getAdjacent();
+		bool inAdj = false;
+		for(its = adj.begin(); its != adj.end(); its++){
+			if(!(*its)->getName().compare(currCity->getName())) inAdj = true;
+		}
+		if(!inAdj) setAdjacencies((*it));
+	}
 }
 vector<City *> Map::shortestPath(City * start, City * dest){
 	vector<City *> ret;
