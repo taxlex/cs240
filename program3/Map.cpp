@@ -20,6 +20,12 @@ Map::Map(string filename){
 		}
 	}
 }
+Map::~Map(){
+	list<City*>::iterator it;
+	for (it = cities.begin(); it != cities.end(); ++it){
+		delete (*it);
+	}
+}
 City* Map::findByName(string cityName){
 	list<City*>::iterator it;
 	for (it = cities.begin(); it != cities.end(); ++it){
@@ -82,10 +88,6 @@ void Map::setAdjacencies(City * currCity){
 	if(closestRight != NULL) ret.push_back(closestRight);
 	if(closestBelow != NULL) ret.push_back(closestBelow);
 	if(closestAbove != NULL) ret.push_back(closestAbove);
-	/*cout<<"!!!"<<currCity->getName()<<endl;
-	for(it = ret.begin(); it != ret.end(); it++){
-		cout<<(*it)->getName()<<endl;
-	}*/
 	currCity->setAdjacent(ret);
 	//Sets the adjacencies of adjacencies
 	for(it = ret.begin(); it != ret.end(); it++){
@@ -99,9 +101,58 @@ void Map::setAdjacencies(City * currCity){
 	}
 }
 vector<City *> Map::shortestPath(City * start, City * dest){
-	vector<City *> ret;
-	return ret;
+	list<City*>::iterator it;
+	for (it = cities.begin(); it != cities.end(); ++it){
+		(*it)->distance = INT_MAX;
+		(*it)->optimalPrevious = NULL;
+		(*it)->explored = false;
+	}
+	start->distance = 0;
+	nextShortest(start, dest);
+	bestWay.clear();
+	getWay(dest);
+	reverse(bestWay.begin(),bestWay.end());
+	return bestWay;
+}
+void Map::nextShortest(City * start, City * dest){
+	list<City*>::iterator it;
+	list<City*> adj = start->getAdjacent();
+	for(it = adj.begin(); it != adj.end(); ++it){
+		if(start->getYCoor() == (*it)->getYCoor()){
+			if((abs(start->getXCoor() - (*it)->getXCoor())+ start->distance) < (*it)->distance){
+				(*it)->distance = abs(start->getXCoor() - (*it)->getXCoor()) + start->distance;
+				(*it)->optimalPrevious = start;
+			}
+		}
+		else{
+			if((abs(start->getYCoor() - (*it)->getYCoor())+ start->distance) < (*it)->distance){
+				(*it)->distance = abs(start->getYCoor() - (*it)->getYCoor()) + start->distance;
+				(*it)->optimalPrevious = start;
+			}
+		}
+	}
+	start->explored = true;
+	City * shortest = dest;
+	bool more = false;
+	for (it = cities.begin(); it != cities.end(); ++it){
+		if(!(*it)->explored && (*it)->distance < shortest->distance){
+			shortest = (*it);
+			more = true;
+		}
+	}
+	if(more){
+		nextShortest(shortest, dest);
+	}
+
+}
+void Map::getWay(City * dest){
+	if(dest->distance != INT_MAX) bestWay.push_back(dest);
+	if(dest->distance < INT_MAX && dest->distance > 0){
+		getWay(dest->optimalPrevious);
+	}
 }
 unsigned int Map::pathDistance(City * start, City * dest){
-	return 1;
+	vector<City *> path = shortestPath(start,dest);
+	if(dest->distance == INT_MAX) return -1;
+	return dest->distance;
 }

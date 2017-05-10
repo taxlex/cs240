@@ -118,7 +118,7 @@ int main(int argc, char *argv[]){
 	checkAdjacencies(map, city, adjacents);
 
 	cerr << "\n\t========================PASS========================\n" << endl;
-/*
+
 	cerr << "\n\tTEST #3: Simple Shortest Path" << endl;
 	vector<string> path = {"mogadishu","nyc"};
 	checkPath(map, path, "mogadishu", "nyc");
@@ -185,7 +185,7 @@ int main(int argc, char *argv[]){
 	cerr << "\n\t========================PASS========================\n" << endl;
 
 
-*/
+
 	return 0;
 
 }
