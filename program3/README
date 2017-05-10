@@ -1,0 +1,30 @@
+CS240: Data Structures & Algorithms
+Spring semester, 2017
+Project3 README FILE
+
+Due Date: May 10, 2017
+Submission Date: May 10, 2017
+Author(s): Alexander Benedict
+
+PERCENT COMPLETE:
+100%
+
+PARTS THAT ARE NOT COMPLETE:
+None
+
+BUGS:
+None known
+
+FILES:
+City.cpp, City.h, Map.cpp, Map.h, program3.cpp, townlist1.txt, townlist2.txt, makefile, README
+
+TO RUN:
+Type "make run" into the commandline while in the program2 folder
+
+EXTRA CREDIT:
+Does not apply
+
+BIBLIOGRAPHY:
+Programming in C, Fourth Edition, by Stephen G. Kochan
+
+MISCELLANEOUS:
